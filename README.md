@@ -48,3 +48,23 @@ The Decentralized Quiz App is a blockchain-based quiz platform built using Sorob
 
 
 <img width="1919" height="1019" alt="image" src="https://github.com/user-attachments/assets/734c4fbc-1314-4e32-a05f-77344a79bbd0" />
+
+
+---
+
+## 🔮 Future Scope
+- NFT rewards for winners
+- Leaderboard system
+- Timed quizzes
+- Multi-question quizzes
+- Frontend integration (React + Stellar SDK)
+
+---
+
+## 🤝 Contributing
+Pull requests are welcome. For major changes, please open an issue first.
+
+---
+
+## 📄 License
+MIT License
