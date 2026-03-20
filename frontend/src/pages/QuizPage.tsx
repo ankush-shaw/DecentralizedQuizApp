@@ -170,7 +170,7 @@ export function QuizPage({
     try {
       const result = await onSubmitAnswer(currentQuestion.id, answer);
       const isOnChain = result !== null;
-      const correct = isOnChain ? result === true : answer === currentQuestion.correctAnswer;
+      const correct = answer === currentQuestion.correctAnswer;
 
       if (isOnChain) {
         setOnChainCount((c) => c + 1);
