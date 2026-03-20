@@ -4,44 +4,9 @@ import { ArrowLeft, ArrowRight, Loader2, Wallet, Link, AlertTriangle, ExternalLi
 import { QuestionCard } from '../components/QuestionCard';
 import { submitAnswer, getTotalQuizzes, initializeContract } from '../services/soroban';
 import type { Question, QuizResult } from '../types';
+import quizData from '../data/questions.json';
 
-const QUIZ_QUESTIONS: Question[] = [
-  {
-    id: 1,
-    text: 'What is the native asset of the Stellar network?',
-    options: ['XLM', 'ETH', 'BTC', 'SOL'],
-    correctAnswer: 'XLM',
-  },
-  {
-    id: 2,
-    text: 'Which programming language is used to write Soroban smart contracts?',
-    options: ['Go', 'TypeScript', 'Rust', 'Solidity'],
-    correctAnswer: 'Rust',
-  },
-  {
-    id: 3,
-    text: 'What does "DeFi" stand for in Web3?',
-    options: ['Decentralized Finance', 'Digital Finance', 'Distributed Funds', 'Direct Finance'],
-    correctAnswer: 'Decentralized Finance',
-  },
-  {
-    id: 4,
-    text: 'What is a smart contract?',
-    options: [
-      'A legal document',
-      'Self-executing code on a blockchain',
-      'A centralized database',
-      'An API endpoint',
-    ],
-    correctAnswer: 'Self-executing code on a blockchain',
-  },
-  {
-    id: 5,
-    text: 'What wallet is used to interact with Stellar DApps?',
-    options: ['MetaMask', 'Phantom', 'Freighter', 'Keplr'],
-    correctAnswer: 'Freighter',
-  },
-];
+const QUIZ_QUESTIONS = quizData as Question[];
 
 // Helper to shuffle the array
 function shuffleArray<T>(array: T[]): T[] {
@@ -78,7 +43,12 @@ export function QuizPage({
   const [onChainCount, setOnChainCount] = useState(0);
   const [isEmpty, setIsEmpty] = useState(false);
   const [isSeeding, setIsSeeding] = useState(false);
-  const [questions] = useState<Question[]>(() => shuffleArray(QUIZ_QUESTIONS));
+  const [questions] = useState<Question[]>(() => 
+    shuffleArray(QUIZ_QUESTIONS.slice(0, 15)).slice(0, 5).map(q => ({
+      ...q,
+      options: shuffleArray(q.options)
+    }))
+  );
 
   useEffect(() => {
     async function checkState() {
